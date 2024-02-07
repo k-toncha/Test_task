@@ -27,16 +27,17 @@ class Mass_FIFO:
 
     def push(self, value):
         self.mass[self.ptr_push] = value
-        self.count += 1
+        
 
         if self.ptr_push + 1 >= self.max_length:  # перевод указателя записи на начало, если уже записан последний элемент
             self.ptr_push = 0
         else:
             self.ptr_push = self.ptr_push + 1
 
-        if self.count > self.max_length:  # перевод указателя чтения из буфера на начало, если уже записан последний элемент
+        if self.count >= self.max_length:  # перевод указателя чтения из буфера на начало, если уже записан последний элемент
             self.ptr_pop = self.ptr_push
-
+        else:
+            self.count += 1
     def pop(self):
 
         if self.count == 0:  # если в буфер ничего не записано
@@ -71,7 +72,9 @@ class Linked_List_FIFO():
         self.max_length = max_length
         self.head = Node()
         self.count = 0  # кол-во операций записи в буфер
-
+        self.ptr_push = 0
+        self.ptr_pop = 0
+        
         for i in range(0, max_length-1):
             if i == 0:
                 New_Node = Node()
@@ -87,22 +90,29 @@ class Linked_List_FIFO():
     def push(self, value):
         if self.count == 0:  # если не было записей в буфер
             self.head.value = value
+            
             self.count += 1
             self.ptr_push = self.head
             self.ptr_pop = self.head
         else:
             self.ptr_push.next.value = value
             self.ptr_push = self.ptr_push.next
-            self.count += 1
 
+            if self.count >= self.max_length:
+                self.ptr_pop = self.ptr_pop.next
+            else:
+                self.count += 1 
+        
+    
     def pop(self):
 
         if self.count == 0:
             return None
-
+        
         del_val = self.ptr_pop.value
         self.ptr_pop.value = None
         self.ptr_pop = self.ptr_pop.next
+        self.count -= 1
         return del_val
 
     def print_list(self):

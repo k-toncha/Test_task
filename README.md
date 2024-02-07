@@ -30,11 +30,6 @@ def isEvenLogicalAnd(value):
 
 следовательно, и работают они одинаковое количество времени. 
 
-<p align="center">
-  <img width="318" height="284" src="https://github.com/k-toncha/Test_task/blob/master/OptO2.PNG">
-</p>
-
-
 Однако при использовании MSVC и оптимизации /Od функция isEvenLogicalAnd 
 работает быстрее: 
 
@@ -42,8 +37,8 @@ def isEvenLogicalAnd(value):
   <img width="336" height="292" src="https://github.com/k-toncha/Test_task/blob/master/Time_test.PNG">
 </p>
 
-в этом можно убедиться так же, сравнив байткод (функция isEvenLogicalAnd имеет больше методов).
-![](https://github.com/k-toncha/Test_task/blob/master/GB_msvc.jpg) 
+в этом можно убедиться так же, сравнив дизасемблированный код (функция isEvenLogicalAnd имеет больше методов).
+![](https://github.com/k-toncha/Test_task/blob/master/GB_msvc.PNG) 
 
 Таким образом, стоит отметить, что до момента выключения оптимизации функции работают относительно одинаково
 по времени. После выключения всех оптимизаций, функция isEvenLogicalAnd быстрее.
